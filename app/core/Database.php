@@ -16,7 +16,8 @@ class Database {
 
         $option = [
             PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ];
 
         try {
@@ -29,6 +30,11 @@ class Database {
     public function query($query)
     {
         $this->stmt = $this->dbh->prepare($query);
+    }
+
+    public function quickQuery(string $query)
+    {
+        return $this->dbh->query($query)->fetchAll();
     }
 
     public function bind($param, $value, $type = null)
@@ -73,7 +79,6 @@ class Database {
     {
         return $this->stmt->rowCount();
     }
-
 
 
 }
