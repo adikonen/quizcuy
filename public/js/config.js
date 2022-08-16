@@ -1,0 +1,1 @@
+const BASEURL = "http://localhost/quizcuy/public/"

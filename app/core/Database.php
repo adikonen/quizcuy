@@ -7,7 +7,7 @@ class Database {
     private $db_name = DB_NAME;
 
     private $dbh;
-    private $stmt;
+    public $stmt;
 
     public function __construct()
     {
@@ -80,5 +80,8 @@ class Database {
         return $this->stmt->rowCount();
     }
 
-
+    public function __destruct()
+    {
+        $this->dbh = null;
+    }
 }

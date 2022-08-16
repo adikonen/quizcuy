@@ -1,0 +1,63 @@
+.bg-base-color {
+    background-color: #D2E4FF
+}
+
+.bg-blue-gradient {
+    background: linear-gradient(180deg, #3965FF 0%, rgba(66, 0, 255, 0) 100%);
+    border-radius: 10px;
+}
+
+.bg-subject1 {
+  background: url("http://localhost/quizcuy/public/img/IPA.jpg");
+  filter: brightness(88%);
+}
+
+.bg-subject2 {
+  background: url("http://localhost/quizcuy/public/img/Matik.jpg");
+  filter: brightness(88%);
+}
+
+.bg-subject3 {
+  background: url("http://localhost/quizcuy/public/img/English.jpg");
+  filter: brightness(88%);
+}
+
+.bg-subject4 {
+  background: url("http://localhost/quizcuy/public/img/TTS.jpg");
+  filter: brightness(88%);
+}
+
+.h1-subject {
+  -webkit-text-stroke: 0.4px white;
+  font-size: 52px;
+}
+
+.border-normal {
+  border-radius: 15px;
+}
+
+.height-subject {
+  height: 190px;
+}
+
+.border-radius{
+    border-radius: 15px;
+}
+
+.kotak {
+    width: 274px;
+    height: 123px;
+    background-color: #95BFFF;
+    border: 2px solid #5D43FF;
+    border-radius: 12px;
+}
+
+.kotak h2 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.back-btn {
+    font-weight: bolder;
+}
+

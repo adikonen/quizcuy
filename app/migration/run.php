@@ -33,6 +33,7 @@ $db->quickQuery("CREATE TABLE kategori_quiz (
 //tabel top up nyawa
 $db->quickQuery("CREATE TABLE cash_nyawa (
     cash_nyawa_id int not null primary key auto_increment,
+    nama_top_up varchar(80) not null,
     jumlah_nyawa_dipulihkan int not null,
     jumlah_cash_dibayar int not null,
     dibuat_saat timestamp not null default now()
