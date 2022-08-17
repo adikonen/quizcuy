@@ -6,8 +6,8 @@ class Database {
     private $pass = DB_PASS;
     private $db_name = DB_NAME;
 
-    private $dbh;
-    public $stmt;
+    private ?PDO $dbh;
+    private ?PDOStatement $stmt;
 
     public function __construct()
     {
@@ -83,5 +83,11 @@ class Database {
     public function __destruct()
     {
         $this->dbh = null;
+    }
+
+    public function resultNum()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_NUM);
     }
 }

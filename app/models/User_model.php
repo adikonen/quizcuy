@@ -70,4 +70,26 @@ class User_model extends Model {
             var_dump($e->getTrace());
         }
     }
+
+    public function userQuizLevel(?string $username = null)
+    {
+        $sql = "SELECT user.nama, nama_level, nama_kategori FROM user_level_kategori
+         INNER JOIN user ON fk_user_id = user_id 
+         INNER JOIN level ON fk_level_id = level_id
+         INNER JOIN kategori_quiz ON fk_kategori_quiz_id = kategori_quiz_id
+         ";
+
+        if($username != null && $username !== 'all')
+        {
+            $sql .= "WHERE user.nama LIKE concat('%',:nama,'%')";
+        }
+
+        $this->db->query($sql);
+        
+        if($username != null && $username !== 'all')
+        {
+            $this->db->bind(":nama",$username);
+        }
+        return $this->db->resultSet();
+    }
 }
