@@ -2,11 +2,6 @@
 
 class User extends Controller {
 
-    public function index()
-    {
-        return redirect('/');
-    }
-
     public function login()
     {
         return $this->view("login/index");
@@ -37,12 +32,33 @@ class User extends Controller {
 
     public function store_login()
     {
-    
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $userModel = $this->model("User_model");
+        $loginCheck = $userModel->login($email, $password);
+
+        if(count($loginCheck) == 0){
+            return redirect('user/login', ["fail" => "salah tod"]);
+        }
+
+
+        else {
+            $_SESSION['user_login'] = $loginCheck;
+            return redirect('dashboard');
+        }
     }
 
     public function store_forgot_password()
     {
     
+    }
+
+    public function logout()
+    {
+        session_unset();
+        session_destroy();
+        return redirect('user/login');
     }
     
 }

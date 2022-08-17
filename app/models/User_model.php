@@ -60,6 +60,16 @@ class User_model extends Model {
         return $res;
     }
 
+    public function login($email, $password){
+        $sql = "SELECT * FROM user WHERE (email = :email AND password = :password)";
+        $this->db->query($sql);
+        $this->db->bind(':email',$email);
+        $this->db->bind(':password',$password);
+
+        $result = $this->db->resultSet();
+        return $result;
+    }
+
     public function register($nama, $email, $password, $noTelpon)
     {
         $sql = "INSERT INTO user (nama, email, password, no_telpon) VALUES ('$nama', '$email', '$password', '$noTelpon') ";  
