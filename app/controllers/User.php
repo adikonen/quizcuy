@@ -23,11 +23,22 @@ class User extends Controller {
         $nama = $_POST['nama'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $no_telpon = $_POST['no_telpon'];
-        
+        $noTelpon = $_POST['no_telpon'];
+        $confirmPassword = $_POST['konfirmasi-password'];
 
         $userModel = $this->model("User_model");
-        $userModel->register($nama, $email, $password, $no_telpon);
+    
+   
+        if($password === $confirmPassword){
+            $userModel->register($nama, $email, $password, $noTelpon);
+            return redirect("user/login");
+        }
+
+        else 
+        {
+            return redirect("user/register", ['fail' => 'Password Dan Konfirmasi Password Harus Sama!']);
+        }
+
     } 
 
     public function store_login()

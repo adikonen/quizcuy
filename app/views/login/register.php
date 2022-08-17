@@ -29,34 +29,34 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Registercuy</h1>
                 </div>
-                <form class="user" action="<?= url("/user/store")?>" method="POST">
+                <form class="user" action="<?= url('user/store_register')?>" method="POST">
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Name" name="nama"/>
+                      <input required type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="Name" name="nama"/>
                     </div>
                     <div class="col-sm-6">
-                      <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Number" name="no_telpon"/>
+                      <input required type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Number" name="no_telpon"/>
                     </div>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" name="email"/>
+                    <input required type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" name="email"/>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password"/>
+                      <input required type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password"/>
                     </div>
                     <div class="col-sm-6">
-                      <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password" name="konfirmasi-password"/>
+                      <input required type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password" name="konfirmasi-password"/>
                     </div>
                   </div>
-                  <button class="btn btn-primary btn-user btn-block"> Register Account </button>
+                  <button type="submit" id="btn-register" class="btn btn-primary btn-user btn-block"> Register Account </button>
                 </form>
                 <hr />
                 <div class="text-center">
-                  <a class="small" href="<?= url('user/forgotPassword')?>">Forgot Password?</a>
+                  <a class="small" href="forgot-password.html">Forgot Password?</a>
                 </div>
                 <div class="text-center">
-                  <a class="small" href="<?= url('user/login')?>">Already have an account? Login!</a>
+                  <a class="small" href="login.html">Already have an account? Login!</a>
                 </div>
               </div>
             </div>
@@ -64,7 +64,10 @@
         </div>
       </div>
     </div>
-
+    
+    <?php if(isset($_SESSION['fail'])):?>
+      <script>alert('<?= $_SESSION['fail']?>')</script>
+    <?php endif;?>
     <!-- Bootstrap core JavaScript-->
     <script src=<?= url("vendor/jquery/jquery.min.js")?>></script>
     <script src=<?= url("vendor/bootstrap/js/bootstrap.bundle.min.js")?>></script>
@@ -74,5 +77,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src=<?= url("js/sb-admin-2.min.js")?>></script>
+    <script>
+      
+    </script>
   </body>
 </html>

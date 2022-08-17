@@ -72,13 +72,14 @@ class User_model extends Model {
 
     public function register($nama, $email, $password, $noTelpon)
     {
-        $sql = "INSERT INTO user (nama, email, password, no_telpon) VALUES ('$nama', '$email', '$password', '$noTelpon') ";  
-        try {
-            $this->db->quickQuery($sql);
-        }
-        catch(Exception $e){
-            var_dump($e->getTrace());
-        }
+        $sql = "INSERT INTO user (nama, email, password, no_telpon) VALUES (:nama, :email, :password, :noTelpon) ";  
+        $this->db->query($sql);
+        $this->db->bind(":nama", $nama);
+        $this->db->bind(":email", $email);
+        $this->db->bind(":password", $password);
+        $this->db->bind(":noTelpon", $noTelpon);
+        
+        return $this->db->resultSet(); 
     }
 
     public function userQuizLevel(?string $username = null)
