@@ -64,5 +64,13 @@ class Quiz_model extends Model
       return $this->db->resultSet();
    }
 
+   public function category($categoryName)
+   {
+      $this->db->query("SELECT DISTINCT nama_level, nama_kategori FROM level INNER JOIN quiz ON fk_level_id = level_id INNER JOIN 
+      kategori_quiz ON fk_kategori_quiz_id = kategori_quiz_id WHERE nama_kategori = '$categoryName'");
+
+      return $this->db->resultSet();
+   }  
+
 
 } 

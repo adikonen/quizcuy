@@ -1,36 +1,11 @@
- <div class="container bg-light p-5 my-5 border-radius ">
-        <h1 class="text-center mb-3">Teka - Teki</h1>
-        <div class="d-flex">
-        <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>1</h2></a>
-        <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>2</h2></a>
-        <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>3</h2></a>
-        <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>4</h2></a>
-        <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>5</h2></a>
-        </div>
-        <div class="d-flex">
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>6</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>7</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>8</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>9</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>10</h2></a>
-        </div>
-         <div class="d-flex">
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>11</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>12</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>13</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>14</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>15</h2></a>
-
-        
-        </div>
-         <div class="d-flex">
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>16</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>17</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>18</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>19</h2></a>
-            <a href="#" class=" m-2 kotak d-flex align-items-center justify-content-center text-dark"><h2>20</h2></a>
-        </div>
-      
-        <a href="#" class="btn-primary m-4 btn px-5 text-dark back-btn">Back</a>
-
+<div class=" card px-5 py-3 border-radius ">
+    <h1 class="text-center mb-4 text-dark font-weight-bold text-uppercase border-bottom-primary"><?= $data['level'][0]['nama_kategori']?></h1>
+    <div class="row justify-content-center">
+        <?php foreach($data['level'] as $item) :?>
+            <a href="<?= url("quiz/level/{$data['nama_level']}")?>"
+                class="d-block font-weight-bold text-black col-xl-2 mx-2 my-1 kotak d-flex align-items-center justify-content-center text-dark">
+                <h2><?= $item['nama_level']?></h2>
+            </a>
+        <?php endforeach;?>
     </div>
+</div>
