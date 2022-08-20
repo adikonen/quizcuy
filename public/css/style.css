@@ -1,10 +1,24 @@
 .bg-base-color {
-    background-color: #D2E4FF
+  background-color: #d2e4ff;
 }
 
 .bg-blue-gradient {
-    background: linear-gradient(180deg, #3965FF 0%, rgba(66, 0, 255, 0) 100%);
-    border-radius: 10px;
+  background: linear-gradient(180deg, #3965ff 0%, rgba(66, 0, 255, 0) 100%);
+  border-radius: 10px;
+}
+
+.show-coin {
+  position: absolute;
+  right: 100px;
+}
+
+.bg-card {
+  background: #95bfff;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 332px;
+  height: 186px;
+  min-width: 332px;
+  min-height: 186px;
 }
 
 .bg-subject1 {
@@ -40,24 +54,23 @@
   height: 190px;
 }
 
-.border-radius{
-    border-radius: 15px;
+.border-radius {
+  border-radius: 15px;
 }
 
 .kotak {
-    width: 274px;
-    height: 123px;
-    background-color: #95BFFF;
-    border: 2px solid #5D43FF;
-    border-radius: 12px;
+  width: 274px;
+  height: 123px;
+  background-color: #95bfff;
+  border: 2px solid #5d43ff;
+  border-radius: 12px;
 }
 
 .kotak h2 {
-    font-size: 40px;
-    font-weight: bold;
+  font-size: 40px;
+  font-weight: bold;
 }
 
 .back-btn {
-    font-weight: bolder;
+  font-weight: bolder;
 }
-

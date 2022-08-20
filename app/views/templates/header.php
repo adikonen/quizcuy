@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Halaman <?= $data['judul']; ?></title>
+    <title>Halaman <?= $data['title']; ?></title>
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/style.css">
     <link rel="stylesheet" href="<?= BASEURL; ?>/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-   <script src=<?= url("vendor/jquery/jquery.min.js");?>></script>
+    <script src=<?= url("vendor/jquery/jquery.min.js");?>></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
     
 </head>

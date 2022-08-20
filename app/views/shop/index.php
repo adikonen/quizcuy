@@ -1,57 +1,29 @@
 <div class="container position-relative bg-light p-md-5 my-5 border-normal">
-  <h1 class="show-coin"><i class="bi-coin d-block"> 99</i></h1>
+  <h1 class="show-coin"><i class="bi-coin d-block"> <?= $data['point']['jumlah_koin']?></i></h1>
   <h1 class="text-dark">Isi nyawamu dengan Point :</h1>
   <div class="d-flex cards justify-content-around m-4 flex-column flex-md-row">
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
+    <?php foreach($data['semua_koin'] as $satu_koin):?>
+    <form method="post" class="buy-btn btn bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center" action="<?= url('shop/store_coin_payment/'.$satu_koin['koin_nyawa_id'])?>">
       <ul class="list-unstyled font-weight-bold h3">
-        <li>X 5 <i class="bi-heart-fill text-danger"></i></li>
+        <li>X <?= $satu_koin['jumlah_nyawa_dipulihkan']?> <i class="bi-heart-fill text-danger"></i></li>
         <li>
-          <i class="mt-4 bi-coin d-block"> 10</i>
+          <i class="mt-4 bi-coin d-block"> <?= $satu_koin['jumlah_koin_dibayar']?></i>
         </li>
       </ul>
-    </div>
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
-      <ul class="list-unstyled font-weight-bold h3">
-        <li>X 7 <i class="bi-heart-fill text-danger"></i></li>
-        <li>
-          <i class="mt-4 bi-coin d-block"> 25</i>
-        </li>
-      </ul>
-    </div>
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
-      <ul class="list-unstyled font-weight-bold h3">
-        <li>X 13 <i class="bi-heart-fill text-danger"></i></li>
-        <li>
-          <i class="mt-4 bi-coin d-block"> 46</i>
-        </li>
-      </ul>
-    </div>
+    </form>
+    <?php endforeach;?>
   </div>
   <h1 class="text-dark">Top up Nyawamu disini :</h1>
   <div class="d-flex cards justify-content-around m-4 flex-column flex-md-row">
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
+    <?php foreach($data['semua_cash'] as $satu_cash): ?>
+    <form action="<?= url('shop/store_cash_payment/'.$satu_cash['cash_nyawa_id'])?>" class="money-btn bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
       <ul class="list-unstyled font-weight-bold h3">
-        <li>X 5 <i class="bi-heart-fill text-danger"></i></li>
+        <li>X <?= $satu_cash['jumlah_nyawa_dipulihkan']?> <i class="bi-heart-fill text-danger"></i></li>
         <li>
-          <p class="mt-4">Rp 15000</p>
+          <p class="mt-4">Rp <?= $satu_cash['jumlah_cash_dibayar']?></p>
         </li>
       </ul>
-    </div>
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
-      <ul class="list-unstyled font-weight-bold h3">
-        <li>X 10 <i class="bi-heart-fill text-danger"></i></li>
-        <li>
-          <p class="mt-4">Rp 29000</p>
-        </li>
-      </ul>
-    </div>
-    <div class="bg-card border-normal m-md-4 my-2 p-5 d-flex align-items-center justify-content-center">
-      <ul class="list-unstyled font-weight-bold h3">
-        <li>X 15 <i class="bi-heart-fill text-danger"></i></li>
-        <li>
-          <p class="mt-4">Rp 42000</p>
-        </li>
-      </ul>
-    </div>
+    </form>
+    <?php endforeach;?>
   </div>
 </div>
