@@ -53,8 +53,7 @@ document.addEventListener("click", async (e) => {
       })
       .then((result) => {
         if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire("Success!", "Pembelian berhasil, Nyawa Mu Telah Bertambah!", "success");
-          e.target.submit();
+          swalWithBootstrapButtons.fire("Success!", "Pembelian berhasil, Nyawa Mu Telah Bertambah!", "success").then(() => e.target.submit());
         } else if (
           /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel

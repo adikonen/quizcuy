@@ -22,3 +22,14 @@
       </div>
   </div>
 </nav>
+<?php if(isset($_SESSION['success'])):?>
+<div class="container text-capitalize table-primary p-2 px-4">
+  <h4><?= $_SESSION['success']?></h4>
+</div>
+<?php endif?>
+
+<?php if(isset($_SESSION['fail'])):?>
+<div class="container text-capitalize table-danger p-2 px-4">
+  <h4><?= $_SESSION['fail']?></h4>
+</div>
+<?php endif?>

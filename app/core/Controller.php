@@ -2,6 +2,17 @@
 
 class Controller {
 
+    public function acceptedMethods(string ...$methods)
+    {
+        foreach($methods as $method)
+        {
+            if($method === $_SERVER["REQUEST_METHOD"]){
+                return ;
+            }
+        }
+        return redirect("/",['fail' => "BAD REQUEST!"]);
+    }
+
     public function __construct()
     {
         $this->access("login_required");
