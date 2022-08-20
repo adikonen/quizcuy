@@ -1,4 +1,4 @@
-document.addEventListener("click", (e) => {
+document.addEventListener("click", async (e) => {
 
     if(e.target.classList.contains('del-btn')){
       Swal.fire({
@@ -22,6 +22,5 @@ document.addEventListener("click", (e) => {
       console.log('jalan mas!');
       searchInput.submit();
     }
-    
-  
 })
+

@@ -11,7 +11,7 @@
     <title><?= $data['title']?></title>
 
     <!-- Custom fonts for this template-->
-    <link href=<?=publicUrl("vendor/fontawesome-free/css/all.min.css")?> rel="stylesheet" type="text/css">
+    <link href=<?=url("vendor/fontawesome-free/css/all.min.css")?> rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -19,7 +19,8 @@
     <!-- Custom styles for this template-->
     <link href=<?= url("css/sb-admin-2.css")?> rel="stylesheet">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href=<?= publicUrl("css/admin.css")?> class="css">
+    <link rel="stylesheet" href=<?= url("css/admin.css")?> class="css">
+    <link rel="stylesheet" href="<?= url('css/style.css')?>">
    
 </head>
 
@@ -67,8 +68,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pages</h6>
-                        <a class="collapse-item" href=<?= publicUrl("dashboard/user_table")?>>Umum</a>
-                        <a class="collapse-item" href=<?= publicUrl("dashboard/user_quiz_table")?>>Lanjutan</a>
+                        <a class="collapse-item" href=<?= url("dashboard/user_table")?>>Umum</a>
+                        <a class="collapse-item" href=<?= url("dashboard/user_quiz_table")?>>Lanjutan</a>
                     </div>
                 </div>
             </li>
@@ -77,7 +78,8 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-brain"></i>
+                    <!-- <i class="fas fa-fw fa-brain"></i> -->
+                    <i class="fas fa-fw fa-cloud-arrow-up"></i>
                     <span>Quiz</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -253,7 +255,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=<?=publicUrl("img/undraw_profile_1.svg")?>
+                                        <img class="rounded-circle" src=<?=url("img/undraw_profile_1.svg")?>
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -265,7 +267,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=<?=publicUrl("img/undraw_profile_2.svg")?>
+                                        <img class="rounded-circle" src=<?=url("img/undraw_profile_2.svg")?>
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -277,7 +279,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src=<?=publicUrl("img/undraw_profile_3.svg")?>
+                                        <img class="rounded-circle" src=<?=url("img/undraw_profile_3.svg")?>
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -311,7 +313,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src=<?=publicUrl("img/undraw_profile.svg")?>>
+                                    src=<?=url("img/undraw_profile.svg")?>>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

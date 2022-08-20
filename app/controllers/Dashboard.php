@@ -1,12 +1,14 @@
 <?php
 class Dashboard extends Controller
 {
-
-    public User_model $userModel;
-
+    private User_model $userModel;
+    private Quiz_model $quizModel;
     public function __construct()
     {
         $this->userModel = $this->model("User_model");
+        $this->quizModel = $this->model("Quiz_model");
+
+        $this->access('admin_only');
     }
 
     public function index()
@@ -66,7 +68,6 @@ class Dashboard extends Controller
 
     public function quiz()
     {
-        $quizModel = $this->model('Quiz_model');
         $kategoriQuizModel = $this->model('KategoriQuiz_model');
 
         $data['all_category'] = $kategoriQuizModel->all();
@@ -76,6 +77,51 @@ class Dashboard extends Controller
         $this->view("dashboard/quiz/index", $data);
         $this->view("templates/admin-footer");
     }
+
+    public function quiz_level(string $category)
+    {
+       
+        $data['levels'] = $this->quizModel->level($category);
+        $data['nama_kategori'] = $data['levels'][0]['nama_kategori'];
+        
+        $data['title'] = "Admin - Level Quiz {$data['nama_kategori']}";
+        
+        $this->view("templates/admin-header",$data);
+        $this->view("dashboard/quiz/level-quiz",$data);
+        $this->view("templates/admin-footer");
+    }
+
+    public function quiz_show(string $category, int $level)
+    {
+        $data['title'] = "Admin QuizShow";
+        $data['quizzes'] = $this->quizModel->show($category, $level);
+        $data['nama_kategori'] = $data['quizzes'][0]['nama_kategori'];
+        $data['nama_level'] = $data['quizzes'][0]['nama_level'];
+        
+        $this->view("templates/admin-header", $data);
+        $this->view("dashboard/quiz/show", $data);
+        $this->view("templates/admin-footer");
+    }
+
+    public function quiz_user_answer(int $quizId)
+    {
+        
+    }
+
+    public function quiz_edit(int $quizId)
+    {
+        $data['title'] = "Edit Quiz";
+        $data['quiz'] = $this->quizModel->get($quizId);
+    
+        $this->view("templates/admin-header", $data);
+        $this->view("dashboard/quiz/edit", $data);
+        $this->view("templates/admin-footer");
+    }
+    public function quiz_create()
+    {
+        
+    }
+
     //ONLY POST ACTION
     public function update_user(int $id)
     {
@@ -87,8 +133,6 @@ class Dashboard extends Controller
                 'no_telpon' => ['min' => 8, 'max' => 30],
             ])->ifHasErrorThrowTo("/dashboard/edit_user/{$id}");
 
-            
-          
             $this->userModel->update($id, [
                 "nama" => $_POST['nama'],
                 "email" => $_POST['email'],
@@ -122,5 +166,49 @@ class Dashboard extends Controller
         }
 
         return redirect("/dashboard/user_table", ['success' => 'Berhasil Menghapus User!']);
+    }
+
+    public function store_quiz()
+    {
+    
+    }
+
+    public function update_quiz(int $id)
+    {
+    
+    }
+
+    public function delete_quiz()
+    {
+    
+    }
+    public function store_kategori_quiz()
+    {
+    
+    }
+
+    public function update_kategori_quiz()
+    {
+    
+    }
+    
+    public function delete_kategori_quiz()
+    {
+    
+    }
+
+    public function store_level()
+    {
+    
+    }
+
+    public function update_level()
+    {
+    
+    }
+
+    public function delete_level()
+    {
+    
     }
 }

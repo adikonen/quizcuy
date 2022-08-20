@@ -14,7 +14,7 @@
                 <?php foreach($data['all_category'] as $item):?>
                     <tr>
                       <td class="text-capitalize"><?= $item['nama_kategori']?></td>
-                      <td><a href="#" class="btn btn-outline-primary">Lihat Quiz</a></td>
+                      <td><a href="<?= url("/dashboard/quiz_show/{$item['nama_kategori']}")?>" class="btn btn-outline-primary">Lihat Quiz</a></td>
                     </tr>
                 <?php endforeach;?>
             </tbody>

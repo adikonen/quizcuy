@@ -55,4 +55,35 @@ abstract class Model {
         return $this->db->single();    
     }
 
+    public function create(array $data)
+    {
+        $insertKey = "INSERT INTO {$this->table} (";
+        $valuesSyntax = " VALUES (";
+        $bind = [];
+        $currentIndex = 0;
+        $lastIndex = count($data) - 1;
+
+        foreach($data as $k => $v){
+            $bind[":$k"] = $v;
+      
+            if($currentIndex >= $lastIndex){
+                $insertKey .= "$k)";
+                $valuesSyntax .= ":$k)";
+                break;
+            }
+
+            $insertKey .= "$k, ";
+            $valuesSyntax .= ":$k, ";
+            $currentIndex++;
+        }
+        
+        $sql = $insertKey . $valuesSyntax;
+        $this->db->query($sql);
+        
+        foreach($bind as $k => $v){
+            $this->db->bind($k,$v);
+        }
+      
+        return $this->db->single(); 
+    }
 }

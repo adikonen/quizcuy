@@ -66,7 +66,7 @@ class User_model extends Model {
         $this->db->bind(':email',$email);
         $this->db->bind(':password',$password);
 
-        $result = $this->db->resultSet();
+        $result = $this->db->single();
         return $result;
     }
 

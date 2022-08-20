@@ -13,4 +13,6 @@ class Quiz extends Controller
         $this->view('home/level');
         $this->view('templates/footer');
     }
+
+    
 }

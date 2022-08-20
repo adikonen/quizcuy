@@ -40,8 +40,8 @@ class App {
             call_user_func_array([$this->controller, $this->method], $this->params);
         }
         catch(TypeError $error){
-            //var_dump($error->getTrace());
-            return redirect('', ['fail' => 'Bad Requests!']);
+            var_dump($error);
+            die;
         }
     }
 
