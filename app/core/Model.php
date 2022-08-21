@@ -2,6 +2,7 @@
 
 abstract class Model {
     public string $table;
+
     protected ?Database $db;
 
     public function __construct()
@@ -13,9 +14,13 @@ abstract class Model {
     {
         $this->db->query("SELECT * FROM {$this->table} WHERE {$this->table}_id = :id LIMIT 1");
         $this->db->bind(":id", $id);
-        return $this->db->single();
+        return $this->db->singleOr404();
     }
-
+    public function select(string ...$column)
+    {
+        $column = implode(',',$column);
+        return $this->db->quickQuery("SELECT $column FROM {$this->table}");
+    }
     public function all()
     {
        return $this->db->quickQuery("SELECT * FROM {$this->table}");

@@ -1,4 +1,5 @@
-<h4 class="text-center my-3 text-capitalize">Kumpulan Quiz <?= $data['nama_kategori']?> Pada Level <?= $data['nama_level']?></h4>
+<h4 class="text-center mt-3 text-capitalize">Kumpulan Quiz <?= $data['nama_kategori']?> Pada Level <?= $data['nama_level']?></h4>
+<div class="text-center my-2"><a href="<?=url('dashboard/quiz_level/'.$data['nama_kategori'])?>" class="btn btn-primary text-capitalize">kembali</a></div>
 <?php $i = 1;?>
 <?php foreach($data['quizzes'] as $quiz): ?>
 <div class="card shadow border-bottom-dark mx-lg-5 mb-lg-4">
@@ -16,7 +17,10 @@
                 aria-labelledby="dropdownMenuLink_<?= $i?>">
                 <div class="dropdown-header">Aksi:</div>
                 <a class="dropdown-item" href="<?= url("dashboard/quiz_edit/{$quiz['quiz_id']}")?>">Edit</a>
-                <a class="dropdown-item" href="#">Lihat Jawaban Dari User</a>
+                <form class="d" action="<?= url("dashboard/delete_quiz/{$quiz['quiz_id']}")?>" method="post">
+                    <button type="button" class="dropdown-item d-inline del-btn">Hapus</button>
+                </form>
+                <a class="dropdown-item" href="<?= url("dashboard/quiz_user_answers/{$quiz['quiz_id']}")?>">Lihat Jawaban Dari User</a>
             </div>
         </div>
     </div>
@@ -26,7 +30,7 @@
 
             <div class="p-2">
                 <?php if($quiz['link_foto_soal'] != null):?>
-                    <img class="img-fluid" src="<?= url('img/IPA.jpg')?>" alt="gambar_quiz">
+                    <img class="img-fluid" src="<?= url($quiz['link_foto_soal'])?>" alt="gambar_quiz">
                 <?php else: ?>
                     <h3 class="text-center my-3">Tidak ada Foto</h3>
                 <?php endif;?>

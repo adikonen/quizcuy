@@ -75,6 +75,24 @@ class Database {
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function resultSetOr404()
+    {
+        $result = $this->resultSet();
+        if($result == null){
+            http_response_code(404);
+        }
+        return $result;
+    }
+
+    public function singleOr404()
+    {
+        $result = $this->single();
+        if($result == null){
+            http_response_code(404);
+        }
+        return $result;
+    }
+
     public function rowCount()
     {
         return $this->stmt->rowCount();

@@ -32,6 +32,11 @@ function redirect(string $path, ?array $message = null)
     die;
 }
 
+function redirectBack(?array $msg = null)
+{
+    return redirect($_SERVER['HTTP_REFERER'], $msg);
+}
+
 function error(string $errorKey)
 {
     return $_SESSION[$errorKey] ?? '';
@@ -48,4 +53,12 @@ function close_all_session_except(?string ...$sessionKeys)
         }
     }
 
+}
+
+function isInvalid($sessionKey)
+{
+    if(isset($_SESSION[$sessionKey]))
+    {
+        return "is_invalid border-danger";
+    }
 }

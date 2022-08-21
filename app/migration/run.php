@@ -21,6 +21,7 @@ $db->quickQuery("CREATE TABLE user (
 $db->quickQuery("CREATE TABLE level (
     level_id int not null primary key auto_increment,
     nama_level int not null,
+    jumlah_koin_didapatkan int not null default 3,
     dibuat_saat timestamp not null default now()
 )");
 

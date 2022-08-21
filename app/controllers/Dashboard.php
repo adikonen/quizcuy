@@ -3,6 +3,7 @@ class Dashboard extends Controller
 {
     private User_model $userModel;
     private Quiz_model $quizModel;
+
     public function __construct()
     {
         $this->userModel = $this->model("User_model");
@@ -25,9 +26,8 @@ class Dashboard extends Controller
         $data['chart'] = implode(',',$chart);
         $data['month-earning'] = $this->userModel->currentMonthEarn();
         $data['year-earning'] = $this->userModel->currentYearEarn();
-        $this->view('templates/admin-header', $data);
-        $this->view('dashboard/index', $data);
-        $this->view('templates/admin-footer');
+       
+        $this->render("dashboard/index",$data)->adminDashboard();
     }
 
     public function user_quiz_table(?string $searchedUserByName = null)
@@ -36,9 +36,7 @@ class Dashboard extends Controller
 
         $data['user_quiz_information'] = $this->userModel->userQuizLevel($searchedUserByName);
 
-        $this->view('templates/admin-header', $data);
-        $this->view("dashboard/user/advance",$data);
-        $this->view("templates/admin-footer");
+        $this->render("dashboard/user/advance",$data)->admin();
     }
     public function user_table(?string $searchedUserByName = null)
     {
@@ -48,9 +46,7 @@ class Dashboard extends Controller
             ?$data['users'] = $this->userModel->all()
             :$data['users'] = $this->userModel->searchByUserName($searchedUserByName);
 
-        $this->view('templates/admin-header', $data);
-        $this->view('dashboard/user/index', $data);
-        $this->view('templates/admin-footer');
+        $this->render('dashboard/user/index', $data)->admin();
     }
 
     public function edit_user(int $id)
@@ -59,12 +55,12 @@ class Dashboard extends Controller
         $data['user'] = $this->userModel->get($id);
         $data['sum_koin'] = $this->userModel->getSumCoin($id)['sum_koin'] ?? null;
         $data['sum_cash'] = $this->userModel->getSumTopUp($id)['sum_cash'] ?? null;
-        $data['title'] = "Edit " . $data['user']['nama'];
-      
-        $this->view('templates/admin-header', $data);
-        $this->view('dashboard/user/edit', $data);
-        $this->view('templates/admin-footer');
+        $data['title'] = "Edit User"; // $data['user']['nama'];
+        
+        $this->render('dashboard/user/edit', $data)->admin();
     }
+
+    
 
     public function quiz()
     {
@@ -73,53 +69,57 @@ class Dashboard extends Controller
         $data['all_category'] = $kategoriQuizModel->all();
         $data['title'] = "Admin - Quiz";
 
-        $this->view("templates/admin-header", $data);
-        $this->view("dashboard/quiz/index", $data);
-        $this->view("templates/admin-footer");
+        $this->render("dashboard/quiz/index", $data)->admin();
     }
 
     public function quiz_level(string $category)
     {
-       
         $data['levels'] = $this->quizModel->level($category);
-        $data['nama_kategori'] = $data['levels'][0]['nama_kategori'];
+        $data['nama_kategori'] = $data['levels'][0]['nama_kategori'] ?? '';
         
         $data['title'] = "Admin - Level Quiz {$data['nama_kategori']}";
         
-        $this->view("templates/admin-header",$data);
-        $this->view("dashboard/quiz/level-quiz",$data);
-        $this->view("templates/admin-footer");
+        $this->render("dashboard/quiz/level-quiz",$data)->admin();
     }
 
     public function quiz_show(string $category, int $level)
     {
         $data['title'] = "Admin QuizShow";
         $data['quizzes'] = $this->quizModel->show($category, $level);
-        $data['nama_kategori'] = $data['quizzes'][0]['nama_kategori'];
-        $data['nama_level'] = $data['quizzes'][0]['nama_level'];
         
-        $this->view("templates/admin-header", $data);
-        $this->view("dashboard/quiz/show", $data);
-        $this->view("templates/admin-footer");
+        $data['nama_kategori'] = $data['quizzes'][0]['nama_kategori'] ?? [];
+        $data['nama_level'] = $data['quizzes'][0]['nama_level'] ?? [];
+        
+        $this->render("dashboard/quiz/show", $data)->admin();
     }
 
-    public function quiz_user_answer(int $quizId)
+    public function quiz_user_answers(int $quizId)
     {
+        $data['jawaban_benar'] = $this->quizModel->correctAnswer($quizId)['jawaban_benar'] ?? [];
         
+        $data['users'] = $this->quizModel->userAnswers($quizId);
+        $data['title'] = "Jawaban Dari User";
+        
+        count($data['users']) < 1
+            ? $this->render("templates/admin/empty", $data)->admin()
+            : $this->render("dashboard/quiz/user-answers",$data)->admin();
     }
-
+    
     public function quiz_edit(int $quizId)
     {
         $data['title'] = "Edit Quiz";
         $data['quiz'] = $this->quizModel->get($quizId);
-    
-        $this->view("templates/admin-header", $data);
-        $this->view("dashboard/quiz/edit", $data);
-        $this->view("templates/admin-footer");
+
+        
+        $this->render("dashboard/quiz/edit", $data)->admin();
     }
     public function quiz_create()
     {
-        
+        $data['title'] = "Buat Quiz";
+        $data['kategori'] = $this->model("KategoriQuiz_model")->select("kategori_quiz_id", "nama_kategori");
+        $data['max_level'] = $this->model("Level_model")->maxLevel();
+    
+        $this->render("dashboard/quiz/create",$data)->admin();
     }
 
     //ONLY POST ACTION
@@ -170,17 +170,122 @@ class Dashboard extends Controller
 
     public function store_quiz()
     {
-    
+        $this->acceptedMethods("POST");
+        
+        $imageManager = new ImageManager('gambar', 'img/quiz/');
+
+        Validator::check([
+            "soal" => ["min" => 5, "max" => 1000],
+            "input_opsi_a" => ["min" => 4, "max" => 255],
+            "input_opsi_b" => ["min" => 4, "max" => 255],
+            "input_opsi_c" => ["min" => 4, "max" => 255],
+            "input_opsi_d" => ["min" => 4, "max" => 255],
+            "jawaban_benar" => ['min' => 1]
+        ])->ifHasErrorThrowTo("dashboard/quiz_create/");
+
+        if(!$imageManager->isNull()){
+            try {
+                $imageManager
+                    ->mustImage()
+                    ->mustNotExists()
+                    ->upload();
+            }
+            catch(Exception $fail)
+            {
+                return redirect("/dashboard/quiz_create/", ['fail' => $fail->getMessage()]);
+            }        
+        }
+
+        try {
+            $this->quizModel->create([
+                "soal" => $_POST["soal"],
+                "opsi_a" => $_POST["input_opsi_a"],
+                "opsi_b" => $_POST["input_opsi_b"],
+                "opsi_c" => $_POST["input_opsi_c"],
+                "opsi_d" => $_POST["input_opsi_d"],
+                "fk_kategori_quiz_id" => $_POST['kategori'],
+                "fk_level_id" => $_POST['level'],
+                "jawaban_benar" => $_POST['jawaban_benar'],
+                "link_foto_soal" => $imageManager->imagePath
+            ]);
+        }
+        catch(Exception $err){
+            var_dump($err->getTrace());
+            die;
+        }
+        return redirect("/dashboard/quiz_create/", ['success' => "Berhasil Membuat Quiz Baru!"]);
     }
 
     public function update_quiz(int $id)
     {
-    
+        $this->acceptedMethods("POST");
+        $quiz = $this->quizModel->get($id);
+        // var_dump($_FILES);
+        // var_dump($_POST);
+        $imageManager = new ImageManager('gambar','img/quiz/');
+      
+         Validator::check([
+            "soal" => ["min" => 5, "max" => 1000],
+            "input_opsi_a" => ["min" => 4, "max" => 255],
+            "input_opsi_b" => ["min" => 4, "max" => 255],
+            "input_opsi_c" => ["min" => 4, "max" => 255],
+            "input_opsi_d" => ["min" => 4, "max" => 255],
+            "jawaban_benar" => ['min' => 1]
+        ])->ifHasErrorThrowTo("dashboard/quiz_edit/$id");
+
+        if(!$imageManager->isNull()){
+            try {
+                $imageManager
+                    ->mustImage()
+                    ->mustNotExists()
+                    ->uploadOrChange($quiz['link_foto_soal']);
+            }
+            catch(Exception $fail)
+            {
+                return redirect("/dashboard/quiz_edit/{$id}", ['fail' => $fail->getMessage()]);
+            }        
+        }
+        try {
+            $this->quizModel->update($id, [
+                "soal" => $_POST["soal"],
+                "opsi_a" => $_POST["input_opsi_a"],
+                "opsi_b" => $_POST["input_opsi_b"],
+                "opsi_c" => $_POST["input_opsi_c"],
+                "opsi_d" => $_POST["input_opsi_d"],
+                "jawaban_benar" => $_POST['jawaban_benar'],
+                "link_foto_soal" => $quiz['link_foto_soal'] ?? $imageManager->imagePath
+            ]);
+        }
+        catch(Exception $err){
+            var_dump($err->getTrace());
+            die;
+        }
+
+        return redirect("/dashboard/quiz_edit/{$id}", ['success' => "Berhasil Update Quiz!"]);
+        
     }
 
-    public function delete_quiz()
+    public function delete_quiz(int $id)
     {
-    
+        $this->acceptedMethods("POST");
+        try {
+            $quiz = $this->quizModel->get($id);
+
+            $imageManager = new ImageManager('gambar', "img/quiz/");
+
+            if(! $imageManager->isNull()){
+                $imageManager->delete($quiz['link_foto_soal']);
+            }
+
+            $this->quizModel->delete($id);
+        }
+        catch(Exception $err)
+        {
+            return redirect("dashboard/quiz_show/{$quiz['nama_kategori']}/{$quiz['nama_level']}}", ['fail' => 'gagal menghapus quiz']);
+        }
+
+        return redirect("dashboard/quiz_show/{$quiz['nama_kategori']}/{$quiz['nama_level']}", ['success' => 'berhasil menghapus quiz']);
+
     }
     public function store_kategori_quiz()
     {

@@ -87,7 +87,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Pages</h6>
                         <a class="collapse-item" href="<?= url('dashboard/quiz/')?>">Daftar Quiz</a>
-                        <a class="collapse-item" href="<?= url('dashboard/create_quiz/')?>?>">Membuat Quiz</a>
+                        <a class="collapse-item" href="<?= url('dashboard/quiz_create/')?>">Membuat Quiz</a>
                     </div>
                 </div>
             </li>

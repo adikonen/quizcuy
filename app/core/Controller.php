@@ -13,6 +13,7 @@ class Controller {
         return redirect("/",['fail' => "BAD REQUEST!"]);
     }
 
+    //SELURUH CONTROLLER MEMAKSA BUAT LOGIN
     public function __construct()
     {
         $this->access("login_required");
@@ -20,7 +21,11 @@ class Controller {
 
     public function view($view, $data = [])
     {
-        require_once '../app/views/' . $view . '.php';
+        require_once '../app/views/' . $view . '.php';   
+    }
+
+    public function render(string $viewpath,array $data = []){
+        return new View($viewpath, $data);
     }
 
     public function model($model)

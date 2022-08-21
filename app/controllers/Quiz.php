@@ -21,8 +21,5 @@ class Quiz extends Controller
         $this->view('templates/header');
         $this->view('quiz/Halaman_soal');
         $this->view('templates/footer');   
-    }
-
-
-    
+    } 
 }

@@ -18,7 +18,8 @@ class Quiz_model extends Model
       $this->db->bind(":nama_kategori", $categoryName);
       $this->db->bind(":nama_level", $level);
      
-      return $this->db->resultSet();
+      $result = $this->db->resultSetOr404();
+      return $result;
    }
 
    public function get(int $quizId)
@@ -30,15 +31,16 @@ class Quiz_model extends Model
 
       $this->db->query($sql);   
       $this->db->bind(":quiz_id", $quizId);
-    
      
-      return $this->db->single();
+      $result = $this->db->singleOr404();
+      
+      return $result;
    }
    public function level(string $category)
    {
-      $this->db->query("SELECT distinct nama_level, nama_kategori from quiz inner join level on fk_level_id = level_id inner join kategori_quiz on fk_kategori_quiz_id = kategori_quiz_id where nama_kategori = :nama_kategori");
+      $this->db->query("SELECT distinct nama_level, nama_kategori from quiz inner join level on fk_level_id = level_id inner join kategori_quiz on fk_kategori_quiz_id = kategori_quiz_id where nama_kategori = :nama_kategori ORDER BY nama_level");
       $this->db->bind(':nama_kategori',$category);
-      return $this->db->resultSet();
+      return $this->db->resultSetOr404();
    }
    public function detail(string $category, int $level)
    {
@@ -53,17 +55,26 @@ class Quiz_model extends Model
       $this->db->bind(":nama_kategori",$category);
       $this->db->bind(":nama_level", $level);
 
-      return $this->db->single();
+      return $this->db->singleOr404();
    }
 
-   public function userAnswers(string $category, int $level)
+   public function userAnswers(int $quizId)
    {
-      $quizId = $this->detail($category, $level)['quiz_id'];
-      $this->db->query("SELECT * FROM jawaban_pilihan_user WHERE fk_quiz_id = :fk_quiz_id");
+      $this->db->query("SELECT
+         nama, pilihan, fk_quiz_id, jawaban_benar FROM jawaban_pilihan_user
+         INNER JOIN user ON fk_user_id = user_id 
+         INNER JOIN quiz ON fk_quiz_id = quiz_id
+         WHERE fk_quiz_id = :fk_quiz_id
+      ");
       $this->db->bind(":fk_quiz_id",$quizId);
       return $this->db->resultSet();
    }
-
+   public function correctAnswer(int $quizId)
+   {
+      $this->db->query("SELECT jawaban_benar FROM quiz WHERE quiz_id = :quiz");
+      $this->db->bind(":quiz",$quizId);
+      return $this->db->singleOr404();
+   }
    public function category($categoryName)
    {
       $this->db->query("SELECT DISTINCT nama_level, nama_kategori FROM level INNER JOIN quiz ON fk_level_id = level_id INNER JOIN 

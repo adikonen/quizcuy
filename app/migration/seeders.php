@@ -31,8 +31,8 @@ try {
         ('ipa'),('matematika'),('english'),('teka-teki')
     ");
     
-    $db->quickQuery("INSERT INTO cash_nyawa (jumlah_nyawa_dipulihkan, jumlah_cash_dibayar) VALUES 
-        (5, 15000),(10,29000),(15,42000),(30, 70000), (50, 100000)
+    $db->quickQuery("INSERT INTO cash_nyawa (jumlah_nyawa_dipulihkan, jumlah_cash_dibayar, nama_top_up) VALUES 
+        (5, 15000, 'paket sedekah'),(10,29000, 'paket miskin'),(15,42000, 'paket menengah'),(30, 70000, 'paket mahal'), (50, 100000, 'paket mewah')
     ");
     
     $db->quickQuery("INSERT INTO koin_nyawa (jumlah_nyawa_dipulihkan, jumlah_koin_dibayar) VALUES 
