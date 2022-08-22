@@ -2,6 +2,8 @@
 
 class Controller {
 
+    
+
     public function acceptedMethods(string ...$methods)
     {
         foreach($methods as $method)
@@ -14,9 +16,12 @@ class Controller {
     }
 
     //SELURUH CONTROLLER MEMAKSA BUAT LOGIN
+
     public function __construct()
     {
         $this->access("login_required");
+
+        $this->access('must_live');
     }
 
     public function view($view, $data = [])
@@ -51,7 +56,11 @@ class Controller {
                     return redirect('/user/login');
                 }
                 break;
-
+            case "must_live":
+                if(!isset($_SESSION['user_login']) || $_SESSION['user_login']['jumlah_nyawa'] < 1){
+                    return redirect('/shop', ['fail' => "Whoops Nyawa Anda Tidak ada. Silahkan beli nyawa!"]);
+                }
+                break;                
             case "admin":
             case "admin_only":
                 if(!isset($_SESSION['user_login']) || $_SESSION['user_login']['nama_posisi'] !== 'admin'){

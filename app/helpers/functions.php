@@ -62,3 +62,8 @@ function isInvalid($sessionKey)
         return "is_invalid border-danger";
     }
 }
+
+function back()
+{
+    return $_SERVER['HTTP_REFERER'];
+}

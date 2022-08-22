@@ -28,6 +28,7 @@ $db->quickQuery("CREATE TABLE level (
 $db->quickQuery("CREATE TABLE kategori_quiz (
     kategori_quiz_id int not null primary key auto_increment,
     nama_kategori varchar(80) not null,
+    link_foto_kategori varchar(255) default null,
     dibuat_saat timestamp not null default now()
 )");
 

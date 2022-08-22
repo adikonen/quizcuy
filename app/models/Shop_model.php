@@ -42,8 +42,10 @@ class Shop_model extends Model {
         $this->db->bind(":cash_nyawa_id",$cash_nyawa_id);
         $jumlah_nyawa_dipulihkan = $this->db->single()['jumlah_nyawa_dipulihkan'];
 
+        $nyawa_setelah_pembelian = $jumlah_nyawa_sebelumnya + $jumlah_nyawa_dipulihkan;
+
         $this->db->query($userSql);
-        $this->db->bind(":jumlah_nyawa",$jumlah_nyawa_sebelumnya + $jumlah_nyawa_dipulihkan);
+        $this->db->bind(":jumlah_nyawa",$nyawa_setelah_pembelian);
         $this->db->bind(":user_id", $user_id);
         $this->db->execute();
 
@@ -55,7 +57,7 @@ class Shop_model extends Model {
         $this->db->bind("fk_cash_nyawa_id", $cash_nyawa_id);
 
         $this->db->execute();
-        return redirect("/shop", ['success' => "berhasil membeli nyawa!"]);
+        return $nyawa_setelah_pembelian;
     }
     public function coin_payment(int $user_id, int $koin_nyawa_id)
     {   
@@ -75,6 +77,7 @@ class Shop_model extends Model {
         $jumlah_nyawa_dipulihkan = $koin_nyawa['jumlah_nyawa_dipulihkan'];
         $jumlah_koin_dibayar = $koin_nyawa['jumlah_koin_dibayar'] ;
         $koin_user = $jumlah_koin_sebelumnya - $jumlah_koin_dibayar;
+        $nyawa_setelah_pembelian = $jumlah_nyawa_sebelumnya + $jumlah_nyawa_dipulihkan;
 
         if ($koin_user < 0){
             return false;
@@ -83,7 +86,7 @@ class Shop_model extends Model {
         $userSql = "UPDATE user SET jumlah_nyawa = :jumlah_nyawa, jumlah_koin = :jumlah_koin WHERE user_id = :user_id";
 
         $this->db->query($userSql);
-        $this->db->bind(":jumlah_nyawa",$jumlah_nyawa_sebelumnya + $jumlah_nyawa_dipulihkan);
+        $this->db->bind(":jumlah_nyawa",$nyawa_setelah_pembelian);
         $this->db->bind(":jumlah_koin",$koin_user);
         $this->db->bind(":user_id", $user_id);
         $this->db->execute();
@@ -96,7 +99,7 @@ class Shop_model extends Model {
         $this->db->bind("fk_koin_nyawa_id", $koin_nyawa_id);
 
         $this->db->execute();
-        return true;
+        return $nyawa_setelah_pembelian;
     }
   
 }

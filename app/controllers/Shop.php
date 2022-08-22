@@ -2,6 +2,11 @@
 
 class Shop extends Controller 
 {
+    public function __construct()
+    {
+        $this->access('login_required');
+    }
+
     public function index()
     {
         $shopModel = $this->model("Shop_model");
@@ -22,7 +27,8 @@ class Shop extends Controller
         $this->acceptedMethods('POST');        
         $shopModel = $this->model("Shop_model");
         
-        $shopModel->cash_payment($_SESSION['user_login']['user_id'], $cash_id);
+        $nyawa = $shopModel->cash_payment($_SESSION['user_login']['user_id'], $cash_id);
+        $_SESSION['user_login']['jumlah_nyawa'] = $nyawa;
         return redirect("/shop", ['success' => "berhasil membeli nyawa!"]);
         
     }
@@ -32,9 +38,13 @@ class Shop extends Controller
         $this->acceptedMethods("POST");
         $shopModel = $this->model("Shop_model");
 
-        if($shopModel->coin_payment($_SESSION['user_login']['user_id'], $coin_id)){
+        $nyawa = $shopModel->coin_payment($_SESSION['user_login']['user_id'], $coin_id);
+
+        if($nyawa){
+            $_SESSION['user_login']['jumlah_nyawa'] = $nyawa;
             return redirect("/shop",['success' => 'berhasil membeli nyawa!']);
         }
+        
         else return redirect("/shop",['fail' => "koin anda tidak cukup!"]);
     }
 

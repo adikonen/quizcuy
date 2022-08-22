@@ -7,19 +7,13 @@
           <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
         </svg>
       </div>
-      <div class="row d-flex justify-content-center my-5">
-        <div class="col-md-5 bg-subject1 height-subject p-5 my-3 mx-md-4 d-flex border-normal justify-content-center align-items-center">
-          <h1 class="h1-subject">IPA</h1>
-        </div>
-        <div class="col-md-5 bg-subject2 height-subject p-5 my-3 mx-md-4 d-flex border-normal justify-content-center align-items-center">
-          <h1 class="h1-subject">MATEMATIKA</h1>
-        </div>
-        <div class="col-md-5 bg-subject3 height-subject p-5 my-3 mx-md-4 d-flex border-normal justify-content-center align-items-center">
-          <h1 class="h1-subject">ENGLISH</h1>
-        </div>
-        <div class="col-md-5 bg-subject4 height-subject p-5 my-3 mx-md-4 d-flex border-normal justify-content-center align-items-center">
-          <h1 class="h1-subject">Teka-Teki Sulit</h1>
-        </div>
+      <div class="row my-5">
+        <?php foreach($data['semua_kategori'] as $category):?>
+          <a href="<?= url('quiz/kategori/'.$category['nama_kategori'])?>" class="text-dark d-block col-md-6 height-subject position-relative p-5 my-3 d-flex border-normal justify-content-center align-items-center">
+            <img src="<?= url('img/ipa.jpg')?>" alt="gambar-<?= $category['nama_kategori']?>" class="img-fluid">
+            <h4 class="h1-subject h2 text-uppercase position-absolute z-1"><?= $category['nama_kategori']?></h4>
+          </a>
+        <?php endforeach;?>
       </div>
     </div>
 </div>
