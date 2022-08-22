@@ -35,5 +35,24 @@ class Quiz extends Controller
         $this->view('quiz/Halaman_soal',$data);
         $this->view('templates/footer');   
     } 
+
+    public function store_user_answer(int $quizId)
+    {
+        $this->acceptedMethods("POST");
+        $jawabanModel = $this->model("JawabanPilihanUser_model");
+
+
+        // $jawabanModel->create([
+        //     "fk_quiz_id" => $quizId,
+        //     "fk_user_id" => $_SESSION['user_login']['user_id'],
+        //     "pilihan" => $_POST['pilihan']
+        // ]);
+
+        if($this->quizModel->isCorrect($quizId, 'a')){
+            return redirectBack(["success" => "Jawban Anda Benar!"]);
+        }
+        return redirectBack(['fail' => "SALAH"]);
+
+    }
     
 }

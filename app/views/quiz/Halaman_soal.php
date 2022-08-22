@@ -8,7 +8,7 @@
         <img src="<?= $data['quiz']['link_foto_soal']?>" class="img-thumbnail" alt="Responsive image" width="400" height="auto">
         <p><?= $data['quiz']['soal']?></p>
     </div>
-    <form action="<?= url("quiz/store")?>" method="POST" class="pl-5">
+<form action="<?= url("quiz/store_user_answer/{$data['quiz']['quiz_id']}")?>" method="POST" class="pl-5">
         <div class="mx-5">
             <input type="radio" id="<?= $data['quiz']['opsi_a']?>" name="opsi_jawaban" value="<?= $data['quiz']['opsi_a']?>">
             <label for="<?= $data['quiz']['opsi_a']?>"><?= $data['quiz']['opsi_a']?></label><br>
@@ -19,7 +19,7 @@
             <input type="radio" id="<?= $data['quiz']['opsi_d']?>" name="opsi_jawaban" value="<?= $data['quiz']['opsi_d']?>">
             <label for="<?= $data['quiz']['opsi_d']?>"><?= $data['quiz']['opsi_d']?></label><br>                   
         <div class="d-flex justify-content-end" >
-            <button class="btn-primary m-4 btn px-5 text-dark confirm-btn">Confirm</button>
+            <button class="btn-primary m-4 btn px-5 confirm-btn">Confirm</button>
         </div>
         </div>
     </form>

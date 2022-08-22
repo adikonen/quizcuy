@@ -91,6 +91,12 @@ class Quiz_model extends Model
       $this->db->bind(":quiz",$quizId);
       return $this->db->singleOr404();
    }
+
+   public function isCorrect(int $quizId, string $answers)
+   {
+      return $this->get($quizId)['jawaban_benar'] === $answers;
+   }
+
    public function category($categoryName)
    {
       $this->db->query("SELECT DISTINCT nama_level, nama_kategori FROM level INNER JOIN quiz ON fk_level_id = level_id INNER JOIN 
