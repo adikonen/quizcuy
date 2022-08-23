@@ -94,7 +94,7 @@ class Dashboard extends Controller
         
         $this->render("dashboard/quiz/show", $data)->admin();
     }
-
+    
     public function quiz_user_answers(int $quizId)
     {
         $data['jawaban_benar'] = $this->quizModel->correctAnswer($quizId)['jawaban_benar'] ?? [];
