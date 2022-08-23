@@ -75,11 +75,13 @@ class ImageManager
     public function upload()
     {
         if(! $this->canUpload ){
+            $this->imagePath = "";
             throw new Exception(implode(',',$this->message));
         } 
 
         if(!move_uploaded_file($_FILES[$this->key]["tmp_name"],$this->targetFile)){
-             throw new Exception("Kesalahan Terjadi Saat Mengupload Foto Anda!");
+            $this->imagePath = "";
+            throw new Exception("Kesalahan Terjadi Saat Mengupload Foto Anda!");
         }
 
         return $this;

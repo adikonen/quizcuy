@@ -26,7 +26,9 @@ class Dashboard extends Controller
         $data['chart'] = implode(',',$chart);
         $data['month-earning'] = $this->userModel->currentMonthEarn();
         $data['year-earning'] = $this->userModel->currentYearEarn();
-       
+        $data['count_user'] = $this->userModel->pick("count(user_id) as total_user")['total_user'];
+        $data['count_quiz'] = $this->quizModel->pick("count(quiz_id) as total_quiz")['total_quiz'];
+        
         $this->render("dashboard/index",$data)->adminDashboard();
     }
 
@@ -120,6 +122,27 @@ class Dashboard extends Controller
         $data['max_level'] = $this->model("Level_model")->maxLevel();
     
         $this->render("dashboard/quiz/create",$data)->admin();
+    }
+
+    public function quiz_category()
+    {
+        $data['title'] = "Buat Quiz Kategori";
+        $data['semua_kategori'] = $this->model("KategoriQuiz_model")->all();
+        $this->render("dashboard/kategori/index",$data)->admin();
+    }
+
+    public function edit_quiz_category(int $id)
+    {
+        $data['title'] = "Edit Quiz Kategori";
+        $kategoriQuizModel = $this->model("KategoriQuiz_model");
+
+        $data['kategori'] = $kategoriQuizModel->get($id);
+        $this->render("dashboard/kategori/edit",$data)->admin();
+    }
+
+    public function shop()
+    {
+        
     }
 
     //ONLY POST ACTION
@@ -253,7 +276,7 @@ class Dashboard extends Controller
                 "opsi_c" => $_POST["input_opsi_c"],
                 "opsi_d" => $_POST["input_opsi_d"],
                 "jawaban_benar" => $_POST['jawaban_benar'],
-                "link_foto_soal" => $quiz['link_foto_soal'] ?? $imageManager->imagePath
+                "link_foto_soal" =>  $imageManager->imagePath ?? $quiz['link_foto_soal']
             ]);
         }
         catch(Exception $err){
@@ -287,33 +310,152 @@ class Dashboard extends Controller
         return redirect("dashboard/quiz_show/{$quiz['nama_kategori']}/{$quiz['nama_level']}", ['success' => 'berhasil menghapus quiz']);
 
     }
-    public function store_kategori_quiz()
-    {
-    
-    }
 
-    public function update_kategori_quiz()
-    {
-    
-    }
-    
-    public function delete_kategori_quiz()
-    {
-    
-    }
 
-    public function store_level()
+    public function store_quiz_category()
     {
-    
+        $kategoriQuizModel = $this->model('KategoriQuiz_model');
+        
+        Validator::check([
+            'nama_kategori' => ['min' => 1, 'max' => 20]
+        ])->ifHasErrorThrowTo(back());
+        
+        $imageManager = new ImageManager('gambar','img/kategori/');
+        
+        if(!$imageManager->isNull()){
+            $imageManager
+                ->mustImage()
+                ->mustNotExists()
+                ->upload();
+        }
+        
+        $kategoriQuizModel->create([
+            'nama_kategori' => $_POST['nama_kategori'],
+            'link_foto_kategori' => $imageManager->imagePath
+        ]);
+        
+        return redirect('dashboard/quiz_category',['success' => 'berhasil menambah kategori baru!']);
     }
-
-    public function update_level()
-    {
     
+    public function update_quiz_category($id)
+    {
+        $kategoriQuizModel = $this->model('KategoriQuiz_model');
+       
+       
+        Validator::check([
+            'nama_kategori' => ['min' => 1, 'max' => 20]
+        ])->ifHasErrorThrowTo(back());
+        
+        $imageManager = new ImageManager('gambar','img/kategori/');
+        
+        $currentImage = $kategoriQuizModel->get($id)['link_foto_kategori'];
+        try {  
+            if(! $imageManager->isNull()){
+                $imageManager
+                    ->mustImage()
+                    ->mustNotExists()
+                    ->uploadOrChange($currentImage);
+            }     
+            $kategoriQuizModel->update($id,[
+                'nama_kategori' => $_POST['nama_kategori'],
+                'link_foto_kategori' =>  $imageManager->imagePath ?? $currentImage
+            ]);
+        }
+        catch(Exception $err)
+        {
+            return redirect('dashboard/edit_quiz_category/'.$id,['fail' => $err->getMessage()]);
+        }
+        
+        return redirect('dashboard/edit_quiz_category/'.$id,['success' => 'berhasil mengupdate kategori']);
     }
-
-    public function delete_level()
-    {
     
+    public function delete_quiz_category($id)
+    {
+        $kategoriQuizModel = $this->model("KategoriQuiz_model");
+        
+        try {
+           $category = $kategoriQuizModel->get($id);
+           
+           $imageManager = new ImageManager('gambar', 'image/kategori/');
+           
+           if(!$imageManager->isNull())
+           {
+             $imageManager->delete($category['link_foto_kategori']);
+           }
+           $kategoriQuizModel->delete($id);
+        }
+        
+        catch(Exception $e){
+            return redirect('dashboard/quiz_category/',['fail' => 'gagal untuk menghapus kategori']);
+        }
+        
+        return redirect('dashboard/quiz_category/',['success' => 'berhasil menghapus kategori']);
+    }
+    
+    public function store_cash_packet()
+    {
+        $this->acceptedMethods("POST");
+        
+        $cashModel =$this->model('Cash_model');
+        
+        try {
+            $cashModel->create($_POST);
+        }
+        catch(Exception $e)
+        {
+            return redirectBack(['fail' => 'gagal membuat paket baru!']);
+        }
+        
+        return redirectBack(['success' => 'berhasil membuat paket baru']);
+    }
+    
+    public function update_cash_packet($id)
+    {
+        $this->acceptedMethods("POST");
+        
+        $cashModel = $this->model('Cash_model');
+        
+        try {
+            $cashModel->update($id, $_POST);
+        }
+        
+        catch(Exception $err){
+            return redirectBack(['fail' => 'gagal update paket']);
+        }
+        
+        return redirectBack(['success' => 'berhasil mengupdate paket']);
+    }
+    
+    public function delete_cash_packet($id)
+    {
+        $cashModel = $this->model('Cash_model');
+        
+        try {
+            $cashModel->delete($id);
+        }
+        
+        catch(Exception $e){
+            return redirectBack(['fail' => 'gagal hapus paket']);
+        }
+        return redirectBack(['success' => 'berhasil menghapus paket']);
+    }
+    
+    public function store_coin_packet()
+    {
+        $coinModel = $this->model('Coin_model');
+        
+        try {
+            $coinModel->create($_POST);
+        }
+        
+        catch(Exception $e)
+        {
+            return redirectBack(['fail' => 'gagal membuat paket baru!']);
+        }
+        return redirectBack(['success' => 'bethasil membuat paket baru']);
+    }
+    public function update_coin_packet($id)
+    {
+        
     }
 }

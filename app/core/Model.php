@@ -21,6 +21,14 @@ abstract class Model {
         $column = implode(',',$column);
         return $this->db->quickQuery("SELECT $column FROM {$this->table}");
     }
+
+    public function pick(string ...$column)
+    {
+        $column = implode(',',$column);
+        $this->db->query("SELECT $column FROM {$this->table}");
+        return $this->db->single();
+    }
+
     public function all()
     {
        return $this->db->quickQuery("SELECT * FROM {$this->table}");

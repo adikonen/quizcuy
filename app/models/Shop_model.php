@@ -78,11 +78,13 @@ class Shop_model extends Model {
         $jumlah_koin_dibayar = $koin_nyawa['jumlah_koin_dibayar'] ;
         $koin_user = $jumlah_koin_sebelumnya - $jumlah_koin_dibayar;
         $nyawa_setelah_pembelian = $jumlah_nyawa_sebelumnya + $jumlah_nyawa_dipulihkan;
-
+        
         if ($koin_user < 0){
             return false;
         }
-
+        
+        $_SESSION['user_login']['jumlah_koin'] = $koin_user;
+        
         $userSql = "UPDATE user SET jumlah_nyawa = :jumlah_nyawa, jumlah_koin = :jumlah_koin WHERE user_id = :user_id";
 
         $this->db->query($userSql);

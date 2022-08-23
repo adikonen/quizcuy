@@ -25,6 +25,13 @@ class User extends Controller
         return $this->view("login/register");
     }
 
+    public function profile(int $id)
+    {
+        $userModel = $this->model("User_model");
+        $data['user'] = $userModel->get($id);
+        return $this->view("login/profile",$data);
+    }
+
     public function forgotPassword()
     {
         return $this->view('login/forgot-password');

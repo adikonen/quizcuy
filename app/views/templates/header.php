@@ -17,10 +17,11 @@
   <div class="icons d-flex align-items-center">
       <a href="<?= url('/')?>" class="bi bi-house-door-fill h1"></a>
       <a href="<?= url('/shop')?>" class="bi bi-cart4 h1 mx-3"></a>
-      <div class="d-flex rounded-circle justify-content-center bg-light px-2">
+      <a href="<?= url('user/profile/'.$_SESSION['user_login']['user_id'])?>" class="text-dark d-flex rounded-circle justify-content-center bg-light px-2">
         <i class="bi bi-person-fill h1"></i>
-      </div>
+      </a>
   </div>
+  
 </nav>
 <?php if(isset($_SESSION['success'])):?>
 <div class="container text-capitalize table-primary p-2 px-4">

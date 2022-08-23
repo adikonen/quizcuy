@@ -16,7 +16,10 @@ class Controller {
     }
 
     //SELURUH CONTROLLER MEMAKSA BUAT LOGIN
-
+    public function render(string $view, array $data = [])
+    {
+        return new View($view, $data);
+    }
     public function __construct()
     {
         $this->access("login_required");
@@ -29,9 +32,6 @@ class Controller {
         require_once '../app/views/' . $view . '.php';   
     }
 
-    public function render(string $viewpath,array $data = []){
-        return new View($viewpath, $data);
-    }
 
     public function model($model)
     {
@@ -57,7 +57,7 @@ class Controller {
                 }
                 break;
             case "must_live":
-                if(!isset($_SESSION['user_login']) || $_SESSION['user_login']['jumlah_nyawa'] < 1){
+                if($_SESSION['user_login']['jumlah_nyawa'] < 1){
                     return redirect('/shop', ['fail' => "Whoops Nyawa Anda Tidak ada. Silahkan beli nyawa!"]);
                 }
                 break;                

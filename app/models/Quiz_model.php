@@ -6,7 +6,7 @@ class Quiz_model extends Model
    public string $table = "quiz";
    private string $commonSql = "SELECT quiz_id, soal, opsi_a, opsi_b,
           opsi_c, opsi_d, jawaban_benar,link_foto_soal,
-          nama_kategori, nama_level FROM quiz INNER JOIN level ON fk_level_id = level_id
+          nama_kategori, nama_level, jumlah_koin_didapatkan FROM quiz INNER JOIN level ON fk_level_id = level_id
           INNER JOIN kategori_quiz ON fk_kategori_quiz_id = kategori_quiz_id ";
 
    public function show(string $categoryName, int $level)

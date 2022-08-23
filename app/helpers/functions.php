@@ -34,7 +34,16 @@ function redirect(string $path, ?array $message = null)
 
 function redirectBack(?array $msg = null)
 {
-    return redirect($_SERVER['HTTP_REFERER'], $msg);
+    $url = back();
+    if($msg !== null)
+    {
+        foreach($msg as $key => $value)
+        {
+            $_SESSION[$key] = $value;
+        }    
+    }
+    header("Location: $url");
+    die;
 }
 
 function error(string $errorKey)
@@ -66,4 +75,10 @@ function isInvalid($sessionKey)
 function back()
 {
     return $_SERVER['HTTP_REFERER'];
+}
+
+function image($path)
+{
+    $path ??= ".jpg";
+    return url($path);
 }
