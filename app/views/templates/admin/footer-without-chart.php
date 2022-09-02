@@ -8,7 +8,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Anjim</span>
+                        <span>Website ini Dibuat Hanya Untuk Tujuan Belajar Mengembang Sebuah Website</span>
                     </div>
                 </div>
             </footer>

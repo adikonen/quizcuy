@@ -21,28 +21,28 @@
         </div>
 
         <div class="form-group row col-lg-7">
-            <div class="col-12 mb-2">
-                <label for="nama_kategori">Nama Kategori</label>
-                <input name="nama_kategori" id="nama_kategori" class="form-control rounded input <?= isInvalid('nama_kategori')?>" value="<?= $data['kategori']['nama_kategori']?>"/>
-                <span class="text-danger"><?= error('nama_kategori')?></span>
-            </div>
-            <div class="col-md-12">
-                <label for="link_foto_kategori">Foto</label>
-                <input type="file" class="form-control input mb-2" type="text" name="gambar">
+                <div class="col-12 mb-2">
+                    <label for="nama_kategori">Nama Kategori</label>
+                    <input name="nama_kategori" id="nama_kategori" class="form-control rounded input <?= isInvalid('nama_kategori')?>" value="<?= $data['kategori']['nama_kategori']?>"/>
+                    <span class="text-danger"><?= error('nama_kategori')?></span>
+                </div>
+                <div class="col-md-12">
+                    <label for="link_foto_kategori">Foto</label>
+                    <input type="file" class="form-control input mb-2" type="text" name="gambar">
+                    
+                </div>
                 
-            </div>
-            
-            <div class="col-md-12">
-                <button class="btn btn-success btn-icon-split mt-3">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-check"></i>
-                    </span>
-                    <span class="text">Simpan Perubahan</span>
-                </button>
-                
-                <a href=<?= url('dashboard/quiz_category')?> class="btn btn-secondary mt-3 mx-3">Kembali</a>
-            </div>
-            </div>
+                <div class="col-md-12">
+                    <button class="btn btn-success btn-icon-split mt-3">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <span class="text">Simpan Perubahan</span>
+                    </button>
+                    
+                    <a href=<?= url('dashboard/quiz_category')?> class="btn btn-secondary mt-3 mx-3">Kembali</a>
+                </div>
+          
         </div>
     </form>
 </div>

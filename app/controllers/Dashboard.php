@@ -334,7 +334,7 @@ class Dashboard extends Controller
             'link_foto_kategori' => $imageManager->imagePath
         ]);
         
-        return redirect('dashboard/quiz_category',['success' => 'berhasil menambah kategori baru!']);
+        return redirect('dashboard/quiz_create',['success' => 'berhasil menambah kategori baru! Silahkan buat quiz baru untuk kategori ' . $_POST['nama_kategori']]);
     }
     
     public function update_quiz_category($id)

@@ -6,7 +6,7 @@ class Quiz_model extends Model
    public string $table = "quiz";
    private string $commonSql = "SELECT quiz_id, soal, opsi_a, opsi_b,
           opsi_c, opsi_d, jawaban_benar,link_foto_soal,
-          nama_kategori, nama_level, jumlah_koin_didapatkan FROM quiz INNER JOIN level ON fk_level_id = level_id
+         nama_kategori, nama_level, jumlah_koin_didapatkan FROM quiz INNER JOIN level ON fk_level_id = level_id
           INNER JOIN kategori_quiz ON fk_kategori_quiz_id = kategori_quiz_id ";
 
    public function show(string $categoryName, int $level)
@@ -66,7 +66,7 @@ class Quiz_model extends Model
    {
       $this->db->query("SELECT
          nama, pilihan, fk_quiz_id, jawaban_benar
-          FROM jawaban_pilihan_user
+         FROM jawaban_pilihan_user
          INNER JOIN user ON fk_user_id = user_id 
          INNER JOIN quiz ON fk_quiz_id = quiz_id
          WHERE fk_quiz_id = :fk_quiz_id

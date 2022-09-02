@@ -53,6 +53,8 @@ class Quiz extends Controller
         if($this->quizModel->isCorrect($quizId, $_POST['opsi_jawaban'])){
             $userModel->update($_SESSION['user_login']['user_id'], ['jumlah_koin' => $_SESSION['user_login']['jumlah_koin'] + $quiz['jumlah_koin_didapatkan']]);
             $_SESSION['user_login']['jumlah_koin'] =  $_SESSION['user_login']['jumlah_koin'] + $quiz['jumlah_koin_didapatkan'];
+            
+ 
             return redirect("quiz/kategori/{$quiz['nama_kategori']}", ["success" => "Selamat jawaban Anda benar, silahkan selesaikan level berikutnya!"]);
         }
 

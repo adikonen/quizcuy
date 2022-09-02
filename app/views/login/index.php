@@ -21,7 +21,7 @@
     <div class="container">
       <!-- Outer Row -->
       <?php if (isset($_SESSION['fail'])):?>
-        <script>alert('<?= $_SESSION['fail']?>')</script>
+        <script>alert('Email Atau Password Salah!')</script>
       <?php endif;?>
       <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">

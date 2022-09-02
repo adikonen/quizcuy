@@ -28,6 +28,7 @@ class Shop extends Controller
         $shopModel = $this->model("Shop_model");
         
         $nyawa = $shopModel->cash_payment($_SESSION['user_login']['user_id'], $cash_id);
+        $_SESSION['user_login']['jumlah_koin'] -=
         $_SESSION['user_login']['jumlah_nyawa'] = $nyawa;
         return redirect("/shop", ['success' => "berhasil membeli nyawa!"]);
         
