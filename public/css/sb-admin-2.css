@@ -11233,19 +11233,19 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("http://localhost/quizcuy/public/img/jeshoots-com-5EKw8Z7CgE4-unsplash.jpg");
+  background: url("http://localhost/quizcuy/public/img/papan.png");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("../img/kenny-eliason-KYxXMTpTzek-unsplash.jpg");
+  background: url("../img/jam-pasir.png");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("../img/alan-de-la-cruz-CmO_GydmKaY-unsplash.jpg");
+  background: url("../img/rubik.png");
   background-position: center;
   background-size: cover;
 }
