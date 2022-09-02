@@ -224,7 +224,12 @@ INSERT INTO `quiz` (`quiz_id`, `fk_kategori_quiz_id`, `fk_level_id`, `link_foto_
 (47, 2, 7, NULL, 'Kemampuan petani untuk mengolah sampah menjadi kompos dari hari ke hari semakin baik. Pada hari pertama ia mampu mengolah 2 m3 sampah, pada hari kedua 5 m3 sampah dan pada hari ketiga 8 m3 sampah. Pada hari ke 10, petani dapat memproses limbah berikut.', '29 m3', '56 m3', '100 m3', '155 m3', 'c', '2022-09-01 17:40:19'),
 (48, 2, 8, NULL, 'Persamaan garis lurus melalui titik (8, 0) dan (0, 6) adalah.', '8x + 6 y = 48', '6x + 8y = 48', '8x + 6th> 48', '6x -8y = 483', 'd', '2022-09-01 17:41:23'),
 (49, 2, 9, NULL, 'Penjual buah menjual dua jenis buah, yaitu mangga dan lengkeng. Dia membeli mangga seharga 12.000 rupee per kilogram dan menjualnya dengan harga 16.000 rupee per kilogram. Dia membeli buah lengkeng dengan harga 9.000 rupee per kilogram dan menjualnya dengan harga 12.000 rupee per kilogram. Modal yang dimilikinya adalah Rp1.800.000,00, sedangkan mobilnya hanya bisa menampung 175 kilogram buah.\r\n\r\nKeuntungan maksimum yang bisa dia dapatkan adalah.', 'Rp.400.000.00', 'Rp.500.000,00', 'Rp.600.000,00', 'Rp.700.000,00', 'c', '2022-09-01 17:43:36'),
-(50, 2, 10, NULL, 'Diketahui bahwa balok ABCD EFGH dengan panjang AB = 6 cm, BC = 4 cm dan AE = 3 cm, jarak dari D ke F.', 'âˆš61 cm', 'âˆš72 cm', '52 cm', '25 cm', 'b', '2022-09-01 17:45:04');
+(50, 2, 10, NULL, 'Diketahui bahwa balok ABCD EFGH dengan panjang AB = 6 cm, BC = 4 cm dan AE = 3 cm, jarak dari D ke F.', 'âˆš61 cm', 'âˆš72 cm', '52 cm', '25 cm', 'b', '2022-09-01 17:45:04'),
+(51, 4, 6, "img/quiz/teka-teki1.png", 'Tebak kata-kata dari gambar diatas!', 'Petidur n BBebek', 'Petidur Bangsa', 'Peturun Bangsa','Pemimpin Bangsa','d','2022-09-01 17:45:05'),
+(52, 4, 7, "img/quiz/teka-teki2.png", 'Tebak kata-kata dari gambar diatas!', 'Buang Hajatan', 'Buang Raja', 'Uang Raja','Buang Hajat','d','2022-09-01 17:45:06'),
+(53, 4, 8, NULL, 'Dua Hal Apa Yang Kamu Tidak Boleh Makan Saat Sarapan Pagi?', 'Makan Durian Dan Minum Coca Cola', 'Makan Siang Dan Makan Malam', 'Makan Jangkrik','Jangkrik Bos','b','2022-09-01 17:45:06'),
+(54, 4, 9, NULL, 'Apa yang selalu naik tapi tidak pernah turun?', 'Umur', 'Burung', 'Balon','Saya Iklas Nyawa Saya Berkurang','a','2022-09-01 17:45:06'),
+(55, 4, 10, NULL, 'Apa yang tumbuh saat makan tapi mati saat tidur', 'Benalu', 'Api', 'Angin','Apel','b','2022-09-01 17:45:06');
 
 -- --------------------------------------------------------
 
@@ -253,10 +258,10 @@ INSERT INTO `user` (`user_id`, `nama`, `password`, `email`, `no_telpon`, `jumlah
 (2, 'konen', '12345678', 'addykonen80@gmail.com', '0898892211', 3, 5, 'pemain', '2022-08-24 01:41:52'),
 (3, 'dedy', '12345678', 'Omekdedy@gmail.com', '0878821117812', 3, 5, 'pemain', '2022-08-24 01:41:52'),
 (4, 'palguna', '12345678', 'palguna1121@gmail.com', '0815527723941', 5, 285, 'pemain', '2022-08-24 01:41:52'),
-(5, 'master sukiawan', 'hipertensi', 'mastersukiawan@gmail.com', '088812311222', 3, 5, 'pemain', '2022-08-24 01:41:52'),
-(6, 'pras_gaming', 'prass12', 'pras@module.com', '0912288002', 3, 5, 'pemain', '2022-08-24 01:41:52'),
-(7, 'john', 'john22', 'johncena@gmail.com', '122448821122', 3, 5, 'pemain', '2022-08-24 01:41:52'),
-(8, 'anna', 'anna22', 'anna@gmail.com', '729911122888', 3, 5, 'pemain', '2022-08-24 01:41:52');
+(5, 'master sukiawan', '12345678', 'mastersukiawan@gmail.com', '088812311222', 3, 5, 'pemain', '2022-08-24 01:41:52'),
+(6, 'pras_gaming', '12345678', 'prasgaming@gmail.com', '0912288002', 3, 5, 'pemain', '2022-08-24 01:41:52'),
+(7, 'john', '12345678', 'johncena@gmail.com', '122448821122', 3, 5, 'pemain', '2022-08-24 01:41:52'),
+(8, 'anna', '12345678', 'anna@gmail.com', '729911122888', 3, 5, 'pemain', '2022-08-24 01:41:52');
 
 -- --------------------------------------------------------
 

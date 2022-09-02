@@ -1,0 +1,33 @@
+Cara Pakai
+
+Pertama silahkan import quizcuy.sql yang ada di folder migration
+pastikan ada database yang bernama quizcuy karena kami menggunakan nama database itu.
+Jika Bapak / Ibu Guru menggunakan nama database lain untuk projek kami
+Maka Bapak / Ibu Guru Wajib mengganti value dari constant DB_NAME yang ada di config.php
+
+Kemudian, kami menggunakan laragon sebagai web server. Folder kami berada di dalam folder www/.
+kami menggunakan port 80 jika Bapak/Ibu Guru menggunakan port lain maka bisa di ubah value dari constant BASEURL 
+
+Terdapat akun admin dan akun-akun user biasa
+
+akun admin
+
+email: superadmin@gmail.com
+password: 12345678
+
+akun konen
+email: addykonen80@gmail.com
+password: 12345678
+
+akun palguna
+email: palguna1121@gmail.com
+password: 12345678
+
+akun dedy
+email: Omekdedy@gmail.com
+password: 12345678
+
+Dan terdapat beberapa akun lainnya bisa di cek pada database
+
+ketika membuat quiz kategori diwajibkan untuk mengisi gambar 
+dan wajib mengisi setidaknya 1 quiz untuk kategori tersebut
