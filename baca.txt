@@ -5,6 +5,13 @@ pastikan ada database yang bernama quizcuy karena kami menggunakan nama database
 Jika Bapak / Ibu Guru menggunakan nama database lain untuk projek kami
 Maka Bapak / Ibu Guru Wajib mengganti value dari constant DB_NAME yang ada di config.php
 
+import database dengan cara berikut
+mysql -u root -p namaDB < app/migration/quizcuy.sql
+
+ini yang kami lakukan untuk mengimport database
+
+mysql -u root -p quizcuy < app/migration/quizcuy.sql
+
 Kemudian, kami menggunakan laragon sebagai web server. Folder kami berada di dalam folder www/.
 kami menggunakan port 80 jika Bapak/Ibu Guru menggunakan port lain maka bisa di ubah value dari constant BASEURL 
 
