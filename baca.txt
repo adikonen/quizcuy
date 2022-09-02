@@ -38,3 +38,6 @@ Dan terdapat beberapa akun lainnya bisa di cek pada database
 
 ketika membuat quiz kategori diwajibkan untuk mengisi gambar 
 dan wajib mengisi setidaknya 1 quiz untuk kategori tersebut
+
+link github: https://github.com/adikonen/quizcuy
+jika ada bug pada web kami, mohon disampaikan.
