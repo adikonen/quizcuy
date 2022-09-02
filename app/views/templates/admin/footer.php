@@ -53,19 +53,16 @@
     
     <!-- Core plugin JavaScript-->
     <script src=<?= url("vendor/jquery-easing/jquery.easing.min.js");?>></script>
-    
-    <!-- Custom scripts for all pages-->
-    <script src=<?= url("vendor/jquery-easing/jquery.easing.min.js");?>></script>
    
     
     <script src=<?php echo url("vendor/chart.js/Chart.min.js");?>></script>
        
-    <script src=<?php echo publicUrl("js/demo/chart-area-demo.js");?>></script>
-    <script src=<?php echo publicUrl("js/demo/chart-pie-demo.js");?>></script>
+    <script src=<?php echo url("js/demo/chart-area-demo.js");?>></script>
+    <script src=<?php echo url("js/demo/chart-pie-demo.js");?>></script>
    
-    <script src=<?=publicUrl("js/sb-admin-2.min.js")?>></script>
+    <script src=<?=url("js/sb-admin-2.min.js")?>></script>
  
-    <script src=<?=publicUrl("js/admin.js")?>></script>
+    <script src=<?=url("js/admin.js")?>></script>
 </body>
 
 </html>

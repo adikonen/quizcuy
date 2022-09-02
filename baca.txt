@@ -40,4 +40,5 @@ ketika membuat quiz kategori diwajibkan untuk mengisi gambar
 dan wajib mengisi setidaknya 1 quiz untuk kategori tersebut
 
 link github: https://github.com/adikonen/quizcuy
-jika ada bug pada web kami, mohon disampaikan.
+karena kami berusaha untuk mengecilkan ukuran projek mungkin saja terdapat fitur yang ada bug nya
+mohon maaf jika ada bug pada web kami, mohon disampaikan.
